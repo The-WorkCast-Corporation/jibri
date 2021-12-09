@@ -1,0 +1,15 @@
+---
+- name: Test name
+  hosts: all
+  tasks:
+  - name: Get jibri from s3
+    amazon.aws.aws_s3:
+      bucket: "{{ BUCKET_LOCATION }}"
+      object: "{{ OBJECT_LOCATION }}"
+      dest: /tmp/jibri.jar
+      mode: get
+      overwrite: different
+  # - name: Restart service jibri
+  #   ansible.builtin.service:
+  #     name: jibri
+  #     state: restart
