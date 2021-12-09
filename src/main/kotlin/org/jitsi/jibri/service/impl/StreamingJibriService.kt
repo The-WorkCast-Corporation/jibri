@@ -35,7 +35,8 @@ import org.jitsi.jibri.util.whenever
 import org.jitsi.metaconfig.config
 import java.util.regex.Pattern
 
-const val YOUTUBE_URL = "rtmp://a.rtmp.youtube.com/live2"
+/* const val YOUTUBE_URL = "rtmp://a.rtmp.youtube.com/live2" */
+const val YOUTUBE_URL = "rtmp:/"
 private const val STREAMING_MAX_BITRATE = 2976
 
 /**
