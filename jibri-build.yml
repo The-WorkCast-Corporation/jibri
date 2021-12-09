@@ -12,4 +12,4 @@
   - name: Restart service jibri
     ansible.builtin.service:
       name: jibri
-      state: restart
+      state: restarted
