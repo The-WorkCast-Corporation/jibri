@@ -6,10 +6,10 @@
     amazon.aws.aws_s3:
       bucket: "{{ BUCKET_LOCATION }}"
       object: "{{ OBJECT_LOCATION }}"
-      dest: /tmp/jibri.jar
+      dest: /opt/jitsi/jibri/jibri.jar
       mode: get
       overwrite: different
-  # - name: Restart service jibri
-  #   ansible.builtin.service:
-  #     name: jibri
-  #     state: restart
+  - name: Restart service jibri
+    ansible.builtin.service:
+      name: jibri
+      state: restart
