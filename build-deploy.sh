@@ -1,7 +1,7 @@
 set -e
 VERSION="test"
 PLAYBOOK_FILE="./jibri-build.yml"
-LOCAL_BUILD="./target/jibri-8.0-SNAPSHOT.jar"
+LOCAL_BUILD="./target/jibri-8.0-SNAPSHOT-jar-with-dependencies.jar"
 REGION="us-east-1"
 TAG_TYPE="jibri"
 
