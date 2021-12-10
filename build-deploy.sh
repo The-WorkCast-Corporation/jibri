@@ -4,13 +4,15 @@ PLAYBOOK_FILE="./jibri-build.yml"
 LOCAL_BUILD="./target/jibri-8.0-SNAPSHOT-jar-with-dependencies.jar"
 REGION="us-east-1"
 TAG_TYPE="jibri"
+TAG_CLIENT="trialist3"
 
-while getopts v:b:l: flag
+while getopts v:b:l:c: flag
 do
     case "${flag}" in
         v) VERSION=${OPTARG};;
         b) BUCKET_LOCATION=${OPTARG};;
         l) LOCAL_BUILD=${OPTARG};;
+        c) TAG_CLIENT=${OPTARG};;
     esac
 done
 
@@ -21,7 +23,7 @@ PLAYBOOK="$(awk '{printf "%s\\n", $0}' $PLAYBOOK_FILE  | sed -e 's/"/\\"/g')"
 
 PARAMETERS="{ \"playbook\": [\"${PLAYBOOK}\"],\"playbookurl\": [\"\"],\"extravars\": [\"BUCKET_LOCATION=${BUCKET_LOCATION} OBJECT_LOCATION=jibri/${VERSION}/jibri.jar\"],\"check\": [\"False\"],\"timeoutSeconds\": [\"3600\"]}"
 
-COMMAND_ID=`aws ssm send-command --document-name "AWS-RunAnsiblePlaybook" --targets "[{\"Key\":\"tag:Type\",\"Values\":[\"${TAG_TYPE}\"]}]" --document-version "1" --parameters "$PARAMETERS" --timeout-seconds 600 --max-concurrency "50" --max-errors "0" --region us-east-1 --query "Command.CommandId" | tr -d '"'`
+COMMAND_ID=`aws ssm send-command --document-name "AWS-RunAnsiblePlaybook" --targets "[{\"Key\":\"tag:Type\",\"Values\":[\"${TAG_TYPE}\"]}, {\"Key\":\"tag:Client\",\"Values\":[\"${TAG_CLIENT}\"]}]" --document-version "1" --parameters "$PARAMETERS" --timeout-seconds 600 --max-concurrency "50" --max-errors "0" --region us-east-1 --query "Command.CommandId" | tr -d '"'`
 
 echo $COMMAND_ID
 
