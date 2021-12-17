@@ -1,5 +1,5 @@
 ---
-- name: Test name
+- name: Deploy
   hosts: all
   tasks:
   - name: Get jibri from s3
