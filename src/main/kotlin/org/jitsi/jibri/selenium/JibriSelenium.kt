@@ -188,7 +188,9 @@ class JibriSelenium(
 
         val chromePrefs = HashMap<String, Any>()
         chromePrefs["w3c"] = false
-        val excludes = listOf("enable-automation")
+
+        val excludes = ArrayList<String>()
+        excludes.add("enable-automation")
         chromePrefs["excludeSwitches"] = excludes
         chromePrefs["useAutomationExtension"] = false
         chromeOptions.setExperimentalOption("prefs", chromePrefs)
