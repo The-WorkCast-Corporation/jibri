@@ -186,10 +186,9 @@ class JibriSelenium(
         val chromeOptions = ChromeOptions()
         chromeOptions.addArguments(chromeOpts)
 
-        val chromeExpOptions = HashMap<String, Any>()
-        chromeExpOptions["w3c"] = false
-        chromeExpOptions["excludeSwitches"] = "enable-automation"
-        chromeOptions.setExperimentalOption("prefs", chromeExpOptions)
+        chromeOptions.setExperimentalOption("w3c", false)
+        chromeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
+        chromeOptions.setExperimentalOption("useAutomationExtension", false)
 
         chromeOptions.addArguments(jibriSeleniumOptions.extraChromeCommandLineFlags)
         val chromeDriverService = ChromeDriverService.Builder().withEnvironment(
